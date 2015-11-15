@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+
+<hibernate-mapping>
+	<class name="org.soni.Vehicle" table="vehicle" discriminator-value="MyVehicle">	
+		<id name="vehicleId">
+			<generator class="increment"/>
+		</id>
+
+		<discriminator column="vehicleType" type="string"/>
+
+		<property name="vehicleName"/>
+		<property name="vehicleOwner"/>
+		
+		<subclass name="org.soni.TwoWheeler" discriminator-value="MyTwoWheeler">
+			<property name="steeringHandle"/>
+		</subclass>
+
+		<subclass name="org.soni.FourWheeler" discriminator-value="MyFourWheeler">
+			<property name="steeringWheel"/>
+		</subclass>
+		
+	</class>
+</hibernate-mapping>

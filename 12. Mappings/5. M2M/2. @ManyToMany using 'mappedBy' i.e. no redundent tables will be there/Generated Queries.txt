@@ -1,0 +1,162 @@
+Jun 01, 2014 4:13:08 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+Jun 01, 2014 4:13:08 PM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {4.3.5.Final}
+Jun 01, 2014 4:13:08 PM org.hibernate.cfg.Environment <clinit>
+INFO: HHH000205: Loaded properties from resource hibernate.properties: {hibernate.connection.driver_class=org.h2.Driver, hibernate.service.allow_crawling=false, hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.max_fetch_depth=5, hibernate.format_sql=true, hibernate.generate_statistics=true, hibernate.connection.username=sa, hibernate.connection.url=jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE, hibernate.bytecode.use_reflection_optimizer=false, hibernate.jdbc.batch_versioned_data=true, hibernate.connection.pool_size=5}
+Jun 01, 2014 4:13:08 PM org.hibernate.cfg.Environment buildBytecodeProvider
+INFO: HHH000021: Bytecode provider name : javassist
+Jun 01, 2014 4:13:09 PM org.hibernate.cfg.Configuration configure
+INFO: HHH000043: Configuring from resource: user.cfg.xml
+Jun 01, 2014 4:13:09 PM org.hibernate.cfg.Configuration getConfigurationInputStream
+INFO: HHH000040: Configuration resource: user.cfg.xml
+Jun 01, 2014 4:13:09 PM org.hibernate.cfg.Configuration doConfigure
+INFO: HHH000041: Configured SessionFactory: null
+Jun 01, 2014 4:13:09 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Jun 01, 2014 4:13:09 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibernateDB]
+Jun 01, 2014 4:13:09 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH000046: Connection properties: {user=postgres, password=****}
+Jun 01, 2014 4:13:09 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH000006: Autocommit mode: false
+Jun 01, 2014 4:13:09 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+INFO: HHH000115: Hibernate connection pool size: 2 (min=1)
+Jun 01, 2014 4:13:11 PM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+Jun 01, 2014 4:13:11 PM org.hibernate.engine.jdbc.internal.LobCreatorBuilder useContextualLobCreation
+INFO: HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+Jun 01, 2014 4:13:11 PM org.hibernate.engine.transaction.internal.TransactionFactoryInitiator initiateService
+INFO: HHH000399: Using default transaction strategy (direct JDBC transactions)
+Jun 01, 2014 4:13:11 PM org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory <init>
+INFO: HHH000397: Using ASTQueryTranslatorFactory
+Jun 01, 2014 4:13:12 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+INFO: HHH000227: Running hbm2ddl schema export
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        drop constraint FK_ijqdf9olxae8k65xlk82318so
+Jun 01, 2014 4:13:12 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: HHH000389: Unsuccessful: alter table UserDetails_Vehicle drop constraint FK_ijqdf9olxae8k65xlk82318so
+Jun 01, 2014 4:13:12 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: ERROR: relation "userdetails_vehicle" does not exist
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        drop constraint FK_9o0pdf3a5qb4mls4d8nb0g7vi
+Jun 01, 2014 4:13:12 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: HHH000389: Unsuccessful: alter table UserDetails_Vehicle drop constraint FK_9o0pdf3a5qb4mls4d8nb0g7vi
+Jun 01, 2014 4:13:12 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: ERROR: relation "userdetails_vehicle" does not exist
+Hibernate: 
+    drop table if exists UserDetails cascade
+Hibernate: 
+    drop table if exists UserDetails_Vehicle cascade
+Hibernate: 
+    drop table if exists Vehicle cascade
+Hibernate: 
+    drop sequence hibernate_sequence
+Hibernate: 
+    create table UserDetails (
+        userID int4 not null,
+        userName varchar(255),
+        primary key (userID)
+    )
+Hibernate: 
+    create table UserDetails_Vehicle (
+        userDetailsCollection_userID int4 not null,
+        vehicle_vehicleId int4 not null
+    )
+Hibernate: 
+    create table Vehicle (
+        vehicleId int4 not null,
+        vehicleName varchar(255),
+        vehicleOwner varchar(255),
+        primary key (vehicleId)
+    )
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        add constraint FK_ijqdf9olxae8k65xlk82318so 
+        foreign key (vehicle_vehicleId) 
+        references Vehicle
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        add constraint FK_9o0pdf3a5qb4mls4d8nb0g7vi 
+        foreign key (userDetailsCollection_userID) 
+        references UserDetails
+Hibernate: 
+    create sequence hibernate_sequence
+Jun 01, 2014 4:13:13 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+INFO: HHH000230: Schema export complete
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    insert 
+    into
+        UserDetails
+        (userName, userID) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle
+        (vehicleName, vehicleOwner, vehicleId) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle
+        (vehicleName, vehicleOwner, vehicleId) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle
+        (vehicleName, vehicleOwner, vehicleId) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        UserDetails_Vehicle
+        (userDetailsCollection_userID, vehicle_vehicleId) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        UserDetails_Vehicle
+        (userDetailsCollection_userID, vehicle_vehicleId) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        UserDetails_Vehicle
+        (userDetailsCollection_userID, vehicle_vehicleId) 
+    values
+        (?, ?)
+Jun 01, 2014 4:13:13 PM org.hibernate.engine.internal.StatisticalLoggingSessionEventListener end
+INFO: Session Metrics {
+    48051 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    2190725 nanoseconds spent preparing 11 JDBC statements;
+    41928901 nanoseconds spent executing 11 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    104167746 nanoseconds spent executing 1 flushes (flushing a total of 4 entities and 4 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}

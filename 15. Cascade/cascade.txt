@@ -1,0 +1,6 @@
+You can use 'cascade' either of the 4 types of mappings.
+
+@ManyToMany(cascade=CascadeType.PERSIST)
+@OneToMany(cascade=CascadeType.PERSIST)
+@ManyToOne(cascade=CascadeType.PERSIST)
+@OneToOne(cascade=CascadeType.PERSIST)

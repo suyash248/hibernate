@@ -1,0 +1,1 @@
+Here bean.jsp and BeanServlet.java are present. You can use either of these 2 files. Change accordingly in <form action="..."> in login.html.

@@ -1,0 +1,188 @@
+@Entity
+public class UserDetials{
+@Id
+private int userId;
+....
+....
+}
+@Entity is used to register a class as an entity class. It means that the object of this class needs to be persist.
+@Id is used to register a field of an entity class as primary key in corresponding table in RDBMS.
+Here by default table name will be the same as the entity class name i.e. "UserDetails" and the column names in that table will be same as field names
+of entity class.
+
+
+@Entity(name="USER_DETAILS")
+Now by using this annotation the name of "entity" is modified to "USER_DETAILS" and so does the name of corresponding table in RDBMS.
+
+
+@Table (name="USER_DETAILS")
+By using this annotation the name of "table" (NOT the name of entity) inside RDBMS is modified to "USER_DETAILS".
+
+
+@Transient
+If you don't want any field of your entity class to be persisted then there are 3 ways of doing so-
+1. Use @Transient as-
+	@Transient
+	private String userName;
+2. Mark that field as static-
+	private static String userName;
+2. Mark that field as transient-
+	transient private String userName;
+
+
+
+@Temporal
+If you are saving a date in your table. Then by default hibernate will save entire date (Day-Month-Year Hour:Minutes:Seconds). But if you don't want
+to save entire date that means you want to save date only(Day-Month-Year) or time only(Hour:Minutes:Seconds) then use @Temporal as-
+To save time only-
+@Temporal(TemporalType.TIME)
+private Date joinedDate;
+
+To save date only-
+@Temporal(TemporalType.DATE)
+private Date joinedDate;
+
+by default i.e. it will save entire date-
+@Temporal(TemporalType.TIMESTAMP)
+private Date joinedDate;
+
+
+
+@Lob
+"Lob" stands for 'Large object'. Most of the databases support the large objects in the form of CLOB & BLOB. Suppose you have a field in your class named 'description' as-
+private String description;
+So by default hibernate uses varchar(255) as datatype for this field. And the problem is when you want to store the large data (>255) then you can't help it. So by using @Lob you can tell hibernate that i'm having no control that what is the size of 'description' field gonna be. So hibernate will treat
+it as large object (CLOB).
+
+
+
+@GeneratedValue
+If you have surrogate key. For example - userId as-
+private int userId;
+this userId will not be of any business use. It is just a sequence then in this case hibernate can generate the sequence for you by using @GeneratedValue. And you don't need to care about the sequence of the userId.
+
+@GeneratedValue (strategy="GenerationType.AUTO")  
+Default and recommended !! By using 'AUTO'  we are letting hibernte to make decision of how the primary keys have to be managed.
+
+@GeneratedValue (strategy="GenerationType.IDENTITY")
+If you are using 'IDENTITY' then hibernate is gonna add an extra column known as identity column in order to maintain the primary keys. Some databases support this featrue as it's not a generic feature.
+
+@GeneratedValue (strategy="GenerationType.SEQUENCE")
+By using this hibernate will auto increment the primary key every time and maintain a sequence.
+
+@GeneratedValue (strategy="GenerationType.TABLE")
+By using this hibernate will create a sperate table and use that table to fetch the last value of primary key and to increment that value in order to use it
+for next record.In nutshell a extra table will be used to maintain the primary keys in your table.
+
+
+
+
+
+@Embedable
+If your entity class contains a value type object, Then this annotation comes into play. Suppose your entity class "UserDetails" contains a field 'address'
+of type "Address" as-
+private Address adsress;
+And you don't want hibernate to create a seperate table for "Address" class i.e. you don't want "Address" class to be treated as a separate entity then you have to declare "Address" as value type. And the object of such class is known as value type object. So you can declare any class as value type by using @Embedable annotation as-
+
+@Embedable
+public class Address{
+	private int pin;
+	private String street;
+	private String city;
+}
+
+
+
+
+
+
+@Column (name="USER_NAME")
+By default all the column names of table are same as the field names of entity class. But if you want you configure the column names then use this annotation.
+How to configure the column names in case of value type ?
+1st WAY : 
+Use @Column annotation for each fields in value type class. suppose "Address" is a value type.
+
+@Embedable
+public class Address{
+	@Column(name="PIN_CODE")
+	private int pin;
+	@Column(name="STREET_NAME")
+	private String street;
+	@Column(name="CITY_NAME")
+	private String city;
+}
+But if you are having 2 value objects (i.e. 2 instances of "Address" class in your entity class) as 'homeAddress' & 'officeAddress' then both the value objects will have same column name and 2 columns having the same name in a table is not allowed.. So to avoid this problem use 2nd way i.e. by overriding attributes.
+
+2nd WAY :
+By overriding/reconfiguring the attributes.
+
+@Embedable
+public class Address{
+	@Column(name="PIN_CODE")
+	private int pin;
+	@Column(name="STREET_NAME")
+	private String street;
+	@Column(name="CITY_NAME")
+	private String city;
+}
+
+@Entity
+public class UserDetails{
+	......
+	......
+	@AttributeOverrides({
+		@AttributeOverride(name="pin", column=@Column(name="HOME_PIN")),
+		@AttributeOverride(name="street", column=@Column(name="HOME_STREET")),
+		@AttributeOverride(name="city", column=@Column(name="HOME_CITY")),
+	})
+	private Address homeAddress;		
+	
+	private Address officeAddress;
+	......
+	......
+}
+
+
+
+
+
+@EmbededId
+You can use an embeded object as the primary key.
+@EmbededId
+private LoginInfo loginId;
+And here "LoginInfo" should implement Serializable and should be embedable as-
+
+@Embedable
+public class LoginInfo implements Serializable{
+.....
+}
+
+And also you can override attributes here if you want to.
+
+
+
+
+@ElementCollection
+This annotation is used to save the collection.
+
+@Entity
+public class UserDetails{
+	....
+	@ElementCollection
+	private Set<Address> listOfAddresses=new HashSet<Address>();
+}
+
+@Embedable
+public class Address{
+	private int pin;
+	private String street;
+	private String city;
+}
+
+So by default hibernate will create an extra table named "userdetails_listofaddresses" where the column 'userdetails_userid' will serve as a foreign key corresponding to the column 'userid' (primary key of "UserDetails") of table "UserDetails".
+
+
+
+
+@NotFound(action=NotFoundAction.IGNORE)
+If you data is not present then hibernate will generate an error. So if you want to avoid this error then use this annotation.

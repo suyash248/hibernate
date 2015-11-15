@@ -1,0 +1,6 @@
+merge()
+
+Hibernate merge can be used to update existing values, however this method create a copy from the passed entity object and return it. The returned object is part of persistent context and tracked for any changes, passed object is not tracked. This is the major difference with merge() from all other methods.
+
+Employee emp4 = (Employee) session.merge(emp);
+System.out.println(emp4 == emp); // returns false

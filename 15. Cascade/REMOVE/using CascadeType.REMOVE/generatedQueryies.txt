@@ -1,0 +1,38 @@
+Hibernate: 
+    /* 
+from
+    Student */ select
+        student0_.STUDENT_ID as STUDENT_1_1_,
+        student0_.STUDENT_NAME as STUDENT_2_1_ 
+    from
+        STUDENTS_T student0_
+Hibernate: 
+    select
+        address0_.STUDENT_ID as STUDENT_4_1_0_,
+        address0_.ADDRESS_ID as ADDRESS_1_0_0_,
+        address0_.ADDRESS_ID as ADDRESS_1_0_1_,
+        address0_.CITY as CITY2_0_1_,
+        address0_.STATE as STATE3_0_1_,
+        address0_.STUDENT_ID as STUDENT_4_0_1_ 
+    from
+        ADDRESSES_T address0_ 
+    where
+        address0_.STUDENT_ID=?
+Hibernate: 
+    /* delete com.entity.Address */ delete 
+        from
+            ADDRESSES_T 
+        where
+            ADDRESS_ID=?
+Hibernate: 
+    /* delete com.entity.Address */ delete 
+        from
+            ADDRESSES_T 
+        where
+            ADDRESS_ID=?
+Hibernate: 
+    /* delete com.entity.Student */ delete 
+        from
+            STUDENTS_T 
+        where
+            STUDENT_ID=?

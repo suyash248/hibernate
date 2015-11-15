@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+ 
+ <hibernate-mapping>
+ 
+	<class name="org.soni.UserDetails" table="UserDetails">	
+		<id name="userID">
+			<generator class="increment"/>
+		</id>
+
+		<property name="userName" type="string"/>
+		<component name="address" class="org.soni.Address">
+			<property name="cityName"/>  
+			<property name="pinCode"/>  
+			<property name="stateName"/>  
+		</component>  
+	</class>
+
+</hibernate-mapping>

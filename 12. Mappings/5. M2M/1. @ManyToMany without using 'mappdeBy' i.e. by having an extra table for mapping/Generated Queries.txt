@@ -1,0 +1,170 @@
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        drop constraint FK_ijqdf9olxae8k65xlk82318so
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: HHH000389: Unsuccessful: alter table UserDetails_Vehicle drop constraint FK_ijqdf9olxae8k65xlk82318so
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: ERROR: relation "userdetails_vehicle" does not exist
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        drop constraint FK_4nwphdvvp3ujx71ngxk1r54mx
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: HHH000389: Unsuccessful: alter table UserDetails_Vehicle drop constraint FK_4nwphdvvp3ujx71ngxk1r54mx
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: ERROR: relation "userdetails_vehicle" does not exist
+Hibernate: 
+    alter table Vehicle_UserDetails 
+        drop constraint FK_5mum4ite9p4w5sefkgn5c5lnx
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: HHH000389: Unsuccessful: alter table Vehicle_UserDetails drop constraint FK_5mum4ite9p4w5sefkgn5c5lnx
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: ERROR: relation "vehicle_userdetails" does not exist
+Hibernate: 
+    alter table Vehicle_UserDetails 
+        drop constraint FK_6wyfe3g1exiphbklmtn3jfua7
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: HHH000389: Unsuccessful: alter table Vehicle_UserDetails drop constraint FK_6wyfe3g1exiphbklmtn3jfua7
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport perform
+ERROR: ERROR: relation "vehicle_userdetails" does not exist
+Hibernate: 
+    drop table if exists UserDetails cascade
+Hibernate: 
+    drop table if exists UserDetails_Vehicle cascade
+Hibernate: 
+    drop table if exists Vehicle cascade
+Hibernate: 
+    drop table if exists Vehicle_UserDetails cascade
+Hibernate: 
+    drop sequence hibernate_sequence
+Hibernate: 
+    create table UserDetails (
+        userID int4 not null,
+        userName varchar(255),
+        primary key (userID)
+    )
+Hibernate: 
+    create table UserDetails_Vehicle (
+        UserDetails_userID int4 not null,
+        vehicle_vehicleId int4 not null
+    )
+Hibernate: 
+    create table Vehicle (
+        vehicleId int4 not null,
+        vehicleName varchar(255),
+        vehicleOwner varchar(255),
+        primary key (vehicleId)
+    )
+Hibernate: 
+    create table Vehicle_UserDetails (
+        Vehicle_vehicleId int4 not null,
+        userDetailsCollection_userID int4 not null
+    )
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        add constraint FK_ijqdf9olxae8k65xlk82318so 
+        foreign key (vehicle_vehicleId) 
+        references Vehicle
+Hibernate: 
+    alter table UserDetails_Vehicle 
+        add constraint FK_4nwphdvvp3ujx71ngxk1r54mx 
+        foreign key (UserDetails_userID) 
+        references UserDetails
+Hibernate: 
+    alter table Vehicle_UserDetails 
+        add constraint FK_5mum4ite9p4w5sefkgn5c5lnx 
+        foreign key (userDetailsCollection_userID) 
+        references UserDetails
+Hibernate: 
+    alter table Vehicle_UserDetails 
+        add constraint FK_6wyfe3g1exiphbklmtn3jfua7 
+        foreign key (Vehicle_vehicleId) 
+        references Vehicle
+Hibernate: 
+    create sequence hibernate_sequence
+Jun 01, 2014 4:04:01 PM org.hibernate.tool.hbm2ddl.SchemaExport execute
+INFO: HHH000230: Schema export complete
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+Hibernate: 
+    select
+        nextval ('hibernate_sequence')
+
+
+
+Hibernate: 
+    insert 
+    into
+        UserDetails
+        (userName, userID) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle
+        (vehicleName, vehicleOwner, vehicleId) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle
+        (vehicleName, vehicleOwner, vehicleId) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle
+        (vehicleName, vehicleOwner, vehicleId) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        UserDetails_Vehicle
+        (UserDetails_userID, vehicle_vehicleId) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        UserDetails_Vehicle
+        (UserDetails_userID, vehicle_vehicleId) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        UserDetails_Vehicle
+        (UserDetails_userID, vehicle_vehicleId) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle_UserDetails
+        (Vehicle_vehicleId, userDetailsCollection_userID) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle_UserDetails
+        (Vehicle_vehicleId, userDetailsCollection_userID) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        Vehicle_UserDetails
+        (Vehicle_vehicleId, userDetailsCollection_userID) 
+    values
+        (?, ?)

@@ -1,0 +1,17 @@
+create or replace procedure GetMail (id in contact.id%type,firstname contact.firstname%type,lastname contact.lastname%type,email contact.email%type) as
+  begin
+  insert into contact
+  values(id,firstname,lastname,email);
+  end;
+/
+
+
+
+
+drop procedure GetMail;
+
+exec GetMail(4,'sunny','soni','suyash248');
+
+begin
+  GetMail(4,'sunny','soni','suyash248');
+end;

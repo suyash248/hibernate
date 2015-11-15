@@ -1,0 +1,32 @@
+persist()
+
+We can use persist() method only within the boundary of a transaction, so it’s safe and takes care of any cascaded objects.
+
+Finally, persist() doesn’t return anything because it doesn't insert the record in database immediately. It might create the record when transaction is commited.
+
+
+SessionFactory sessionFactory = HibernateUtil.getSessionFactory();  
+         
+//persist example - with transaction
+Session session2 = sessionFactory.openSession();
+Transaction tx2 = session2.beginTransaction();
+Employee emp2 = HibernateSaveExample.getTestEmployee();
+session2.persist(emp2);
+System.out.println("Persist called");
+emp2.setName("Kumar"); // will be updated in database too
+System.out.println("Employee Name updated");
+System.out.println("8. Employee persist called with transaction, id="+emp2.getId()+", address id="+emp2.getAddress().getId());
+tx2.commit();
+System.out.println("*****");
+ 
+// Close resources
+sessionFactory.close();
+
+OUTPUT :-
+Hibernate: insert into EMPLOYEE (emp_name, emp_salary) values (?, ?)
+8. Employee persist called with transaction, id=158, address id=158
+Hibernate: insert into ADDRESS (address_line1, city, zipcode, emp_id) values (?, ?, ?, ?)
+Hibernate: update EMPLOYEE set emp_name=?, emp_salary=? where emp_id=?
+*****
+
+Notice that first employee object is inserted, then at the time of transaction commit, update query is executed to update the name value. Also mapped object address is saved into database.

@@ -1,0 +1,66 @@
+Hibernate: 
+    /* 
+from
+    Student */ select
+        student0_.STUDENT_ID as STUDENT_1_1_,
+        student0_.STUDENT_NAME as STUDENT_2_1_ 
+    from
+        STUDENTS_T student0_
+Suyash :-
+Hibernate: 
+    select
+        address0_.STUDENT_ID as STUDENT_4_1_0_,
+        address0_.ADDRESS_ID as ADDRESS_1_0_0_,
+        address0_.ADDRESS_ID as ADDRESS_1_0_1_,
+        address0_.CITY as CITY2_0_1_,
+        address0_.STATE as STATE3_0_1_,
+        address0_.STUDENT_ID as STUDENT_4_0_1_ 
+    from
+        ADDRESSES_T address0_ 
+    where
+        address0_.STUDENT_ID=?
+Delhi : Delhi
+Dharamshala : HP
+Hibernate: 
+    /* delete com.entity.Student */ delete 
+        from
+            STUDENTS_T 
+        where
+            STUDENT_ID=?
+Oct 14, 2014 1:10:10 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 1451, SQLState: 23000
+Oct 14, 2014 1:10:10 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: Cannot delete or update a parent row: a foreign key constraint fails (`personaldb`.`addresses_t`, CONSTRAINT `FK_fl87xv6xq5gklbh2fokvcln75` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students_t` (`STUDENT_ID`))
+Oct 14, 2014 1:10:10 PM org.hibernate.engine.jdbc.batch.internal.AbstractBatchImpl release
+INFO: HHH000010: On release of batch it still contained JDBC statements
+Exception in thread "main" org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:129)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:49)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:126)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:112)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:211)
+	at org.hibernate.engine.jdbc.batch.internal.NonBatchingBatch.addToBatch(NonBatchingBatch.java:62)
+	at org.hibernate.persister.entity.AbstractEntityPersister.delete(AbstractEntityPersister.java:3400)
+	at org.hibernate.persister.entity.AbstractEntityPersister.delete(AbstractEntityPersister.java:3630)
+	at org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:114)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:463)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:349)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:350)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:67)
+	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1191)
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1257)
+	at org.hibernate.internal.QueryImpl.list(QueryImpl.java:103)
+	at com.main.Main.fetchRecords(Main.java:32)
+	at com.main.Main.main(Main.java:26)
+Caused by: com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`personaldb`.`addresses_t`, CONSTRAINT `FK_fl87xv6xq5gklbh2fokvcln75` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students_t` (`STUDENT_ID`))
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:931)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:2985)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1631)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:1723)
+	at com.mysql.jdbc.Connection.execSQL(Connection.java:3283)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1332)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1604)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1519)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1504)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:208)
+	... 13 more

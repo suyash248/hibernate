@@ -1,0 +1,31 @@
+Hibernate: 
+    /* 
+from
+    Student */ select
+        student0_.STUDENT_ID as STUDENT_1_1_,
+        student0_.STUDENT_NAME as STUDENT_2_1_ 
+    from
+        STUDENTS_T student0_
+Hibernate: 
+    /* load one-to-many com.entity.Student.address */ select
+        address0_.STUDENT_ID as STUDENT_4_1_1_,
+        address0_.ADDRESS_ID as ADDRESS_1_0_1_,
+        address0_.ADDRESS_ID as ADDRESS_1_0_0_,
+        address0_.CITY as CITY2_0_0_,
+        address0_.STATE as STATE3_0_0_,
+        address0_.STUDENT_ID as STUDENT_4_0_0_ 
+    from
+        ADDRESSES_T address0_ 
+    where
+        address0_.STUDENT_ID in (
+            select
+                student0_.STUDENT_ID 
+            from
+                STUDENTS_T student0_
+        )
+Delhi : Delhi
+Dharamshala : HP
+Ghaziabad : UP
+Lalitpur : UP
+New York : NYC
+Washington : Columbia

@@ -1,0 +1,11 @@
+<web-app>
+	<servlet>
+		<servlet-name>BeanServlet</servlet-name>
+		<servlet-class>hibernate2.BeanServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BeanServlet</servlet-name>
+		<url-pattern>beanServlet</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
